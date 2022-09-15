@@ -1,10 +1,13 @@
-import http from "node:http";
-import app from "./lib/app.js";
+import http from 'node:http';
+import app from './lib/app.js';
+import dotenv from 'dotenv';
 
-const server = http.createServer(app);
+dotenv.config();
 
-const PORT = process.env.PORT || 4000;
+export const server = http.createServer(app);
+const port = process.env.APP_PORT || 8080;
+const hostname = process.env.APP_HOST || 'localhost';
 
-server.listen(PORT, () => {
-  console.log(server.address());
+server.listen(port, hostname, () => {
+  console.log(`👂 Server is listening on ${JSON.stringify(server.address())}`);
 });
